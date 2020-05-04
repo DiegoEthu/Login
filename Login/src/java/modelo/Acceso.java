@@ -12,7 +12,7 @@ package modelo;
 public class Acceso {
     public String autentificar(String username, String password){
         String respuesta;
-        if(username.equals("PROFESOR") && password.equals("TRENTINO")){
+        if(username.equals("PROFESOR") && password.equals("CONTRASEÑA")){
             respuesta = "Bienvenido";
         }else{
             respuesta = "Usuario incorrecto";
