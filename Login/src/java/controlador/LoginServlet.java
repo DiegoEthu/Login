@@ -12,11 +12,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Acceso;
 
 /**
  *
- * @author Juan Carlos
+ * @author Diego tello
  */
 public class LoginServlet extends HttpServlet {
 
@@ -35,12 +36,24 @@ public class LoginServlet extends HttpServlet {
         
         String usuario = request.getParameter("username");
         String password = request.getParameter("password");
+        String destino ="login.jsp";
+        
+        if(usuario.isEmpty() || password.isEmpty()){
+            destino = "index.html";
+        }
         
         Acceso miAcceso = new Acceso();
-        String respuesta = miAcceso.autentificar(usuario, password);
+        Boolean respuesta = miAcceso.autentificar(usuario, password);
         request.setAttribute("respuesta", respuesta);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+        HttpSession session = request.getSession(true);
+        if(respuesta){
+             session.setAttribute("username", usuario);
+             destino = "login.jsp";
+        }else{
+            session.invalidate();
+            destino = "index.html";
+        }
+        RequestDispatcher rd = request.getRequestDispatcher(destino);
         rd.forward(request, response);
     }
 

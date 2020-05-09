@@ -7,15 +7,15 @@ package modelo;
 
 /**
  *
- * @author Juan Carlos
+ * @author diego tello
  */
 public class Acceso {
-    public String autentificar(String username, String password){
-        String respuesta;
+    public Boolean autentificar(String username, String password){
+        Boolean respuesta;
         if(username.equals("PROFESOR") && password.equals("CONTRASEÑA")){
-            respuesta = "Bienvenido";
+            respuesta = true;
         }else{
-            respuesta = "Usuario incorrecto";
+            respuesta = false;
         }
         return respuesta;
     }
